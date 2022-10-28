@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import Card from "./Сard";
-import CardLoading from "./СardLoading";
-import Container from "./Сontainer";
+import Card from "../components/Сard";
+import CardLoading from "../components/СardLoading";
+import Container from "../components/Сontainer";
 import useSWR from "swr";
 import { useState } from "react";
 import { fetchJSON } from "../utils/fetchJSON";
