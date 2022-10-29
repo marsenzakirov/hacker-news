@@ -14,6 +14,7 @@ export default function Comments({ count, comments }: IProps) {
             <h2 className="text-4xl font-bold mb-3">{count} Comments</h2>
             {comments.map((comment, index) => {
               if (comment.deleted) return null;
+              if (comment.dead) return null;
               return (
                 <Comment
                   author={comment.by}

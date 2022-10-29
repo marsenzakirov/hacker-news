@@ -47,6 +47,7 @@ export default function Comment({ text, author, date, kids }: IProps) {
             {nestComments.length > 0 &&
               nestComments.map((item, index) => {
                 if (item.deleted) return null;
+                if (item.dead) return null;
                 return (
                   <NestComment
                     text={item.text}
