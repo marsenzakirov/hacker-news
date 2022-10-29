@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Divider, Hero } from "react-daisyui";
+import React from "react";
+import { Hero } from "react-daisyui";
 import Comment from "./Comment";
 interface IProps {
   count: number;

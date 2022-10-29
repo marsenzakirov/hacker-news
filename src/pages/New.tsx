@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import Preloader from "../components/Preloader";
 import Container from "../components/Сontainer";
 import { fetchJSON } from "../utils/fetchJSON";
-import { Hero, Button, Divider, Alert } from "react-daisyui";
+import { Button, Divider, Alert } from "react-daisyui";
 import Comments from "../components/Comments";
 const getComments = async (id: number, kids: any[]) => {
   const comments = kids.map((id: any) => {
@@ -31,6 +31,7 @@ export default function New() {
         setComments(comments);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
   if (!data) return <Preloader />;
   return (
@@ -46,7 +47,12 @@ export default function New() {
         })}
       </p>
       <p>
-        <a href={data.url} target="_blank" className="text-sky-500">
+        <a
+          href={data.url}
+          target="_blank"
+          className="text-sky-500"
+          rel="noreferrer"
+        >
           Source
         </a>{" "}
         - {data.by}
