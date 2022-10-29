@@ -71,8 +71,9 @@ export default function Dashboard() {
               return (
                 <Card
                   key={index}
+                  id={item.id}
                   author={item.by}
-                  createdAt="19.22.2003"
+                  createdAt={item.time}
                   rating={item.score}
                   title={item.title}
                 />
