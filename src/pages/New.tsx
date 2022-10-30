@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
 import Preloader from "../components/Preloader";
-import Container from "../components/Сontainer";
+import Container from "../components/Container"; // ! лол ты чего?
 import { fetchJSON } from "../utils/fetchJSON";
 import { Button, Divider, Alert } from "react-daisyui";
 import Comments from "../components/Comments";
