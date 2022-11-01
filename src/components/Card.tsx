@@ -18,7 +18,7 @@ export default function CardComponent({
   createdAt,
 }: IProps) {
   return (
-    <Link to={`new=${id}`}>
+    <Link to={`article=${id}`}>
       <Card>
         <Card.Body>
           <Card.Title tag="h3" className="">
