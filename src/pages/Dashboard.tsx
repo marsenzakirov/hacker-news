@@ -5,10 +5,16 @@ import Container from "../components/Container";
 import useSWR from "swr";
 import { useState } from "react";
 import { fetchJSON } from "../utils/fetchJSON";
+import { useDispatch, useSelector } from "react-redux";
+import { addNews, setNews } from "../store/newsSlice";
+
 export default function Dashboard() {
-  const [news, setNews] = useState<any[]>([]);
   const [fetching, setFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const news = useSelector((state: any) => state.news.items);
+  const dispatch = useDispatch();
+
   const { data } = useSWR(
     "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty",
     (url) => {
@@ -21,7 +27,7 @@ export default function Dashboard() {
   );
   useEffect(() => {
     if (Array.isArray(data)) {
-      setNews([]);
+      dispatch(setNews([]));
       setFetching(true);
     }
   }, [data]);
@@ -35,13 +41,12 @@ export default function Dashboard() {
             { method: "get" }
           );
         });
-      Promise.all(news).then((news) => {
-        setNews((item) => [...item, ...news]);
+      Promise.all(news).then((newItems) => {
+        dispatch(addNews(newItems));
         setFetching(false);
         setCurrentPage((page) => page + 1);
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, fetching]);
   useEffect(() => {
     document.addEventListener("scroll", scrollHandler);
@@ -50,10 +55,6 @@ export default function Dashboard() {
     };
   }, []);
   const scrollHandler = (e: any) => {
-    console.log(
-      e.target.documentElement.scrollHeight -
-        (e.target.documentElement.scrollTop + window.innerHeight)
-    );
     if (
       e.target.documentElement.scrollHeight -
         (e.target.documentElement.scrollTop + window.innerHeight) <
@@ -67,7 +68,7 @@ export default function Dashboard() {
       <h2 className="text-3xl mb-3">News</h2>
       <ul className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
         {news.length > 0
-          ? news.map((item, index) => {
+          ? news.map((item: any, index: number) => {
               return (
                 <Card
                   key={index}

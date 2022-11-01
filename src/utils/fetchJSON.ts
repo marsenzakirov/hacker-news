@@ -20,7 +20,6 @@ export async function fetchJSON(
       return res.data;
     })
     .catch((e) => {
-      console.log(e);
       if (e.response.status >= 500) {
         throw new APIError(
           e.response.status,
