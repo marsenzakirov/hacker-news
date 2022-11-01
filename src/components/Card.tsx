@@ -7,7 +7,7 @@ interface IProps {
   title: string;
   rating: number;
   author: string;
-  createdAt: string;
+  createdAt: number;
 }
 
 export default function CardComponent({

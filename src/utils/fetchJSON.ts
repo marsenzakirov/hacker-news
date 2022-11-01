@@ -1,6 +1,6 @@
 import axios from "axios";
 class APIError extends Error {
-  error: { code: any; message: any; data: any };
+  error: { code: number; message: string; data: any };
   constructor(code: number, message: string, data: any) {
     super(message);
     this.error = { code: code, message: message, data: data };

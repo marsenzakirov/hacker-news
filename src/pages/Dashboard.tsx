@@ -8,6 +8,7 @@ import { fetchJSON } from "../utils/fetchJSON";
 import { useDispatch, useSelector } from "react-redux";
 import { addNews, setNews } from "../store/newsSlice";
 import { Button } from "react-daisyui";
+import { items } from "../types";
 
 export default function Dashboard() {
   const [fetching, setFetching] = useState(true);
@@ -79,7 +80,7 @@ export default function Dashboard() {
       </div>
       <ul className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
         {news.length > 0
-          ? news.map((item: any, index: number) => {
+          ? news.map((item: items, index: number) => {
               return (
                 <Card
                   key={index}

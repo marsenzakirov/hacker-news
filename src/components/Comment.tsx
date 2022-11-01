@@ -1,22 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Divider, Button } from "react-daisyui";
 import { fetchJSON } from "../utils/fetchJSON";
 import NestComment from "./NestComment";
-
+import {items} from "../types/index";
 interface IProps {
   text: string;
   author: string;
-  date: string;
-  kids: any;
+  date: number;
+  kids: number[];
 }
 export default function Comment({ text, author, date, kids }: IProps) {
-  const [nestComments, setNestComments] = React.useState<any[]>([]);
+  const [nestComments, setNestComments] = useState<items[]>([]);
   const [showNestComments, setShowNestComments] =
-    React.useState<boolean>(false);
+    useState<boolean>(false);
   useEffect(() => {
-    // Fetching comments
     if (Array.isArray(kids)) {
-      const comments = kids.map((id: any) => {
+      const comments = kids.map((id: number) => {
         return fetchJSON(
           `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`,
           { method: "get" }

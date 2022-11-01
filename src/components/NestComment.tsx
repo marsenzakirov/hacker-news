@@ -4,7 +4,7 @@ import { Divider } from "react-daisyui";
 interface IProps {
   text: string;
   author: string;
-  date: string;
+  date: number;
 }
 export default function NestComment({ text, author, date }: IProps) {
   return (
