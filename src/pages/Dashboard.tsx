@@ -7,6 +7,7 @@ import { useState } from "react";
 import { fetchJSON } from "../utils/fetchJSON";
 import { useDispatch, useSelector } from "react-redux";
 import { addNews, setNews } from "../store/newsSlice";
+import { Button } from "react-daisyui";
 
 export default function Dashboard() {
   const [fetching, setFetching] = useState(true);
@@ -18,10 +19,7 @@ export default function Dashboard() {
   const { data } = useSWR(
     "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty",
     (url) => {
-      return fetchJSON(url, { method: "get" }).then((arr) => {
-        setCurrentPage(1);
-        return arr;
-      });
+      return fetchJSON(url, { method: "get" });
     },
     { refreshInterval: 60000 }
   );
@@ -33,6 +31,7 @@ export default function Dashboard() {
   }, [data]);
   useEffect(() => {
     if (Array.isArray(data) && fetching) {
+      setCurrentPage(1);
       const news = data
         .slice(currentPage * 10, currentPage * 10 + 10)
         .map((id) => {
@@ -65,7 +64,19 @@ export default function Dashboard() {
   };
   return (
     <Container className="py-5">
-      <h2 className="text-3xl mb-3">News</h2>
+      <div className="flex justify-between items-center mb-3">
+      <h2 className="text-3xl">News</h2>
+      <Button
+				size='md'
+				variant='outline'
+				color='primary'
+				className='my-3'
+				onClick={() => {
+          fetchJSON("https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty", { method: "get" });
+				}}>
+				Update news
+			</Button>
+      </div>
       <ul className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2">
         {news.length > 0
           ? news.map((item: any, index: number) => {
